@@ -2,19 +2,22 @@
 # -*- coding: utf-8 -*-
 
 import serial,os
-ser = serial.Serial(0,19200, timeout=None)
+#ser = serial.Serial(0,19200, timeout=None)
 def test():
     command = "echo \"Tratat!\" | osd_cat -c green -s 2 -p middle -d 1"
     os.system(command)
+    print "pętla"
 
-def watch():    
-    temp=ser.read()
-    ser.flushInput()
-    x=ord(temp)
-    print temp
-    print x
-    if x == 12:
-        loop="false"
+def watch():
+    try:
+        temp=ser.read()
+        ser.flushInput()
+        x=ord(temp)
+        print temp
+        print x
+    except:
+        pass
+
     if x == 32:
         command='dcop amarok player prev' 
         os.system(command)
@@ -45,4 +48,5 @@ def watch():
     if x == 60:
         command='dcop amarok player showOSD'
         os.system(command)
-#ser.close() #here?
+print "aaaa"
+        #ser.close() #here?

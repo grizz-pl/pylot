@@ -9,11 +9,11 @@ __copyright__ = "Witold Firlej"
 
 import sys,os,pydcop
 from PyQt4 import QtCore, QtGui
-from PyQt4.QtCore import QTimer #hmm quite stupid?
+from PyQt4.QtCore import QTimer, QThread #hmm quite stupid?
 #from pylot_form import Ui_Form
 #from pylot_settings_form import Ui_Dialog
-#import pylot_config
 import pylot_remote
+import pylot_config
 #from pylot_form import Ui_Form_Main # NO GUI so far
 
 
@@ -22,14 +22,12 @@ class MyForm(QtGui.QMainWindow):
         QtGui.QWidget.__init__(self, parent)
         #self.ui = Ui_Form_Main() #Only tray is needed so far
         #self.ui.setupUi(self)
-        self._Timer = QtCore.QTimer(self)
-        #self.connect(self._Timer, QtCore.SIGNAL('timeout()'), pylot_remote.test)
-        self.connect(self._Timer, QtCore.SIGNAL('timeout()'), pylot_remote.watch)
-    
-    isPopupClicked = 0
+#        self._Timer = QtCore.QTimer(self)
+#        self.connect(self._Timer, QtCore.SIGNAL('timeout()'), pylot_remote.test)
+        #self.connect(self._Timer, QtCore.SIGNAL('timeout()'), pylot_remote.watch)
     
     def tray(self):
-        self.tray=QtGui.QSystemTrayIcon(QtGui.QIcon("/home/users/grizz/bin/Pylot/ico.png"))
+        self.tray=QtGui.QSystemTrayIcon(QtGui.QIcon(pylot_config.directory + "ico.png"))
         menu=QtGui.QMenu(self)
         myapp.connect(self.tray,QtCore.SIGNAL("activated (QSystemTrayIcon::ActivationReason)"),self.trayActivated)
         #menu.addMenu(self.statusMenu)
@@ -55,13 +53,25 @@ class MyForm(QtGui.QMainWindow):
      #  event.ignore()   #switched of during testing
     # myapp.hide()
 
-
+class A (QThread):
+    def __init__(self):
+        QThread.__init__(self)
+        self._Timer = QtCore.QTimer(self)
+        self.connect(self._Timer, QtCore.SIGNAL('timeout()'), pylot_remote.test)
+        #self.connect(self._Timer, QtCore.SIGNAL('timeout()'), pylot_remote.watch)
+        
+    def start (self):
+        self._Timer.start(pylot_config.timerDelay)
+    
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
     myapp = MyForm()
     #myapp.show() #maybe in future ;p
     myapp.tray() 
-    myapp._Timer.start(100)
+    #myapp._Timer.start(100)
+    licznik=A()
+    licznik.start()
+    print "dududu"
     sys.exit(app.exec_())
 
 
