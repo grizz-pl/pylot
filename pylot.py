@@ -57,8 +57,8 @@ class A (QThread):
     def __init__(self):
         QThread.__init__(self)
         self._Timer = QtCore.QTimer(self)
-        self.connect(self._Timer, QtCore.SIGNAL('timeout()'), pylot_remote.test)
-        #self.connect(self._Timer, QtCore.SIGNAL('timeout()'), pylot_remote.watch)
+#        self.connect(self._Timer, QtCore.SIGNAL('timeout()'), pylot_remote.test)
+        self.connect(self._Timer, QtCore.SIGNAL('timeout()'), pylot_remote.watch)
         
     def start (self):
         self._Timer.start(pylot_config.timerDelay)
