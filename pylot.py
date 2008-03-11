@@ -3,7 +3,7 @@
 #pylot ver. 0.1 by grizz - Witek Firlej http://grizz.pl
 
 __author__    = "Witold Firlej (http://grizz.pl)"
-__version__   = "0.1"
+__version__   = "0.2"
 __license__   = "GPL"
 __copyright__ = "Witold Firlej"
 
@@ -69,9 +69,9 @@ if __name__ == "__main__":
     #myapp.show() #maybe in future ;p
     myapp.tray() 
     #myapp._Timer.start(100)
+    print 'Pylot ver.'+ __version__ +  ' by ' + __author__
     licznik=A()
     licznik.start()
-    print "dududu"
     sys.exit(app.exec_())
 
 
