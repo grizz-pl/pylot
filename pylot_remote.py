@@ -24,6 +24,7 @@ def watch():
         temp=ser.read()
         ser.flushInput()
         x=ord(temp)
+        ### switching between progz ###
         if x == 55: #amarok
             pylot_config.whatIsEnabled = 1
             print "amarok"
@@ -33,6 +34,7 @@ def watch():
         elif x == 50: #smplayer
             pylot_config.whatIsEnabled = 3  
             print "smplayer"
+            ###bindings ###
         elif pylot_config.whatIsEnabled == 1:  # amarok
             if x == 32: command='dcop amarok player prev' 
             if x == 33: command='dcop amarok player next' 
