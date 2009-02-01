@@ -44,7 +44,7 @@ def watch():
             if x == 17: command='dcop amarok player volumeDown' 
             if x == 13: command='dcop amarok player mute'  #mute/unmute
             if x == 60: command='dcop amarok player showOSD'
-            if x == 45 or x >= 1 and x <=9: command='dcop amarok player setRating ' + str(x) #rate a song!
+            if x == 45 or x >= 1 and x <=9: command='dcop amarok player showOSD && dcop amarok player setRating ' + str(x) #rate a song!
         elif pylot_config.whatIsEnabled == "kaffeine": #kaffeine
             if x == 32: command='dcop kaffeine KaffeineIface posPlus' #go forword
             if x == 33: command='dcop kaffeine KaffeineIface posMinus' #rewind

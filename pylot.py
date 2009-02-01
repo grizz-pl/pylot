@@ -7,7 +7,7 @@ __version__   = "0.3"
 __license__   = "GPL"
 __copyright__ = "Witold Firlej"
 
-import sys,os
+import sys
 from PyQt4 import QtCore
 from PyQt4 import QtGui
 from PyQt4.QtCore import QThread 
